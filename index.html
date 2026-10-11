@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Una sorpresa para ti</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div id="petalos-container" aria-hidden="true"></div>
+
+    <main class="carta">
+        
+<div class="jardin-magico" aria-hidden="true">
+    <div class="flor flor-1">✿</div>
+    <div class="flor flor-2">✾</div>
+    <div class="flor flor-3">❀</div>
+    <div class="flor flor-4">✿</div>
+
+    <div class="luz luz-1"></div>
+    <div class="luz luz-2"></div>
+    <div class="luz luz-3"></div>
+
+    <div class="petalos"></div>
+</div>
+
+        <!-- Escena 1: el sobre sorpresa -->
+        <section id="escena-sobre" class="escena activa">
+            <p class="subtitulo">UNA PEQUEÑA SORPRESA</p>
+
+<div class="sobre">
+    
+<div class="destinataria">
+    Para
+    <span class="nombre-destinataria">Mary</span>
+</div>
+
+<div class="mensaje-sorpresa">
+    Una pequeña sorpresa para ti ♡
+</div>
+
+    <div class="carta-interior"></div>
+
+    <div class="cuerpo-sobre"></div>
+
+    <div class="solapa"></div>
+
+    <span class="sello">♡</span>
+</div>
+
+            <h1>Hay algo especial para ti...</h1>
+
+            <p>Preparé un pequeño detalle para celebrar tu día.</p>
+
+<button id="iniciar-experiencia" type="button">
+    ♫ Comenzar con música
+</button>
+
+            <button id="abrir-carta">Abrir mi sorpresa</button>
+        </section>
+
+        <!-- Escena 2: la felicitación -->
+        <section id="escena-bienvenida" class="escena">
+            <p class="subtitulo">HOY ES TU DÍA</p>
+
+            <h1>¡Feliz cumpleaños!</h1>
+
+            <p>Hoy comienza una nueva página de tu historia.</p>
+
+            <button id="continuar-mensajes">
+                Descubrir mi mensaje
+            </button>
+        </section>
+
+        <!-- Escena 3: los mensajes personales -->
+        <section id="escena-mensajes" class="escena">
+            <p class="subtitulo">UNAS PALABRAS PARA TI</p>
+
+            <h1>Con cariño, para ti</h1>
+
+            <p id="texto-mensaje">
+                Hay personas que hacen más bonitos los momentos
+                que compartimos con ellas.
+            </p>
+
+            <p id="progreso-mensaje">Mensaje 1 de 3</p>
+
+            <button id="siguiente-mensaje">
+                Leer el siguiente mensaje
+            </button>
+        </section>
+
+        <!-- Escena 4: el final mágico -->
+        <section id="escena-final" class="escena">
+            <p class="subtitulo">UN DESEO PARA TI</p>
+
+            <h1>Que la vida te regale momentos hermosos</h1>
+
+            <p>
+                Que nunca te falten motivos para sonreír,
+                sueños por cumplir y bendiciones en tu camino.
+            </p>
+
+            
+<div class="recuerdos-especiales" aria-label="Dos símbolos de recuerdos especiales">
+    <div class="recuerdo recuerdo-girasol">
+        <div class="polvo-estrellas" aria-hidden="true"></div>
+        <span class="simbolo-recuerdo" aria-hidden="true">🌻</span>
+        <p>Un deseo para que sigas floreciendo.</p>
+    </div>
+
+    <div class="recuerdo recuerdo-piedra">
+        <div class="polvo-estrellas" aria-hidden="true"></div>
+        <span class="simbolo-recuerdo" aria-hidden="true">🪨</span>
+        <p>Un pequeño recuerdo que conserva su significado.</p>
+    </div>
+</div>
+
+
+            <button id="musica">
+                ♫ Activar música
+            </button>
+
+            <button id="volver-inicio">
+                Volver a ver la carta
+            </button>
+        </section>
+
+    </main>
+
+
+<audio id="cancion" loop preload="none">
+    <source src="assets/cancion.mp3" type="audio/mpeg">
+    Tu navegador no puede reproducir este audio.
+</audio>
+
+</body>
+</html>
