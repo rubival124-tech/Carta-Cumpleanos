@@ -1,0 +1,979 @@
+
+/* =====================================
+   1. COLORES Y CONFIGURACIÓN GENERAL
+===================================== */
+
+:root {
+    --noche: #17152D;
+    --ciruela: #302344;
+    --lavanda: #C7A6E5;
+    --rosa: #F1C8D5;
+    --dorado: #F0D79B;
+    --crema: #FFF8F2;
+    --texto-suave: #E4D9ED;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    color: var(--crema);
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            #59416F 0,
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            #402644 0,
+            transparent 35%
+        ),
+        var(--noche);
+
+    overflow-x: hidden;
+}
+
+/* =====================================
+   2. PEQUEÑAS LUCES DEL FONDO
+===================================== */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(
+            2px 2px at 15% 25%,
+            var(--dorado) 50%,
+            transparent 100%
+        ),
+        radial-gradient(
+            2px 2px at 80% 15%,
+            white 50%,
+            transparent 100%
+        ),
+        radial-gradient(
+            3px 3px at 65% 70%,
+            var(--lavanda) 50%,
+            transparent 100%
+        ),
+        radial-gradient(
+            2px 2px at 30% 85%,
+            white 50%,
+            transparent 100%
+        );
+
+    background-size: 240px 240px;
+    opacity: 0.65;
+    animation: brillar 5s ease-in-out infinite alternate;
+}
+
+@keyframes brillar {
+    from {
+        opacity: 0.3;
+    }
+
+    to {
+        opacity: 0.85;
+    }
+}
+
+/* =====================================
+   3. CONTENEDOR PRINCIPAL
+===================================== */
+
+.carta {
+    width: 100%;
+    min-height: 100vh;
+    padding: 32px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+}
+
+/* =====================================
+   4. ESCENAS
+===================================== */
+
+.escena {
+    display: none;
+
+    width: 100%;
+    max-width: 650px;
+    min-height: 490px;
+    padding: 48px 35px;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(71, 49, 86, 0.88),
+            rgba(35, 28, 56, 0.94)
+        );
+
+    border: 1px solid rgba(240, 215, 155, 0.35);
+    border-radius: 28px;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.25),
+        inset 0 0 35px rgba(199, 166, 229, 0.06);
+
+    position: relative;
+    overflow: hidden;
+}
+
+.escena.activa {
+    display: flex;
+    animation: aparecer 0.8s ease both;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =====================================
+   5. TÍTULOS Y TEXTOS
+===================================== */
+
+.subtitulo {
+    color: var(--dorado);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    line-height: 1.8;
+    font-weight: 600;
+}
+
+h1 {
+    max-width: 520px;
+    margin: 0;
+
+    color: var(--rosa);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.escena > p:not(.subtitulo) {
+    max-width: 440px;
+    color: var(--texto-suave);
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+/* =====================================
+   6. BOTONES
+===================================== */
+
+button {
+    padding: 14px 25px;
+    border: 1px solid rgba(240, 215, 155, 0.6);
+    border-radius: 999px;
+
+    background: linear-gradient(
+        120deg,
+        #D8B6E8,
+        #F1C8D5
+    );
+
+    color: #30213D;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 25px rgba(199, 166, 229, 0.15);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(199, 166, 229, 0.3);
+    filter: brightness(1.06);
+}
+
+button:focus-visible {
+    outline: 3px solid var(--dorado);
+    outline-offset: 5px;
+}
+
+
+/* Botón mágico de música */
+
+#iniciar-experiencia,
+#musica {
+    background: linear-gradient(
+        135deg,
+        rgba(45, 35, 72, 0.95),
+        rgba(23, 21, 45, 0.98)
+    );
+
+    color: var(--crema);
+    border: 1px solid var(--dorado);
+    border-radius: 999px;
+
+    padding: 13px 24px;
+    font-size: 0.95rem;
+    letter-spacing: 0.4px;
+
+    box-shadow:
+        0 0 12px rgba(240, 215, 155, 0.12),
+        0 0 24px rgba(199, 166, 229, 0.12);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+
+    cursor: pointer;
+}
+
+/* Brillo al pasar el cursor */
+
+#iniciar-experiencia:hover,
+#musica:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--rosa);
+
+    box-shadow:
+        0 0 14px rgba(240, 215, 155, 0.3),
+        0 0 28px rgba(199, 166, 229, 0.3);
+}
+
+/* Efecto al pulsar */
+
+#iniciar-experiencia:active,
+#musica:active {
+    transform: scale(0.97);
+}
+
+/* Apariencia cuando está desactivado */
+
+#iniciar-experiencia:disabled {
+    opacity: 0.75;
+    cursor: default;
+    transform: none;
+}
+
+
+/* =====================================
+   7. SOBRE Y SELLO
+===================================== */
+
+
+/* =====================================
+   7. SOBRE ANIMADO
+===================================== */
+
+.sobre {
+    width: 190px;
+    height: 125px;
+    margin: 20px 0;
+
+    position: relative;
+    perspective: 700px;
+
+    animation: flotar 3.5s ease-in-out infinite;
+}
+
+/* Cuerpo del sobre */
+
+.cuerpo-sobre {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        145deg,
+        #E8BDD4,
+        #B997D3
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 5px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+    z-index: 2;
+}
+
+/* Carta que sale del sobre */
+
+.carta-interior {
+    position: absolute;
+
+    width: 78%;
+    height: 85%;
+
+    left: 11%;
+    top: 8%;
+
+    background: var(--crema);
+    border-radius: 4px;
+
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+
+    z-index: 1;
+
+    transition:
+        transform 1s ease,
+        height 1s ease;
+}
+
+/* Solapa triangular */
+
+.solapa {
+    position: absolute;
+    inset: 0;
+
+    background: #D6AFCF;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 65%
+    );
+
+    transform-origin: top center;
+    transform: rotateX(0deg);
+
+    backface-visibility: visible;
+
+    z-index: 4;
+
+    transition:
+        transform 0.8s ease,
+        filter 0.8s ease;
+}
+
+/* Sello del corazón */
+
+.sello {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--ciruela);
+    border: 2px solid var(--dorado);
+
+    color: var(--dorado);
+    font-size: 1.8rem;
+
+    box-shadow: 0 0 25px rgba(240, 215, 155, 0.3);
+
+    z-index: 5;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.4s ease;
+}
+
+/* Estado abierto */
+
+.sobre.abierto {
+    animation: ninguna;
+}
+
+.sobre.abierto .solapa {
+    transform: rotateX(180deg);
+    filter: brightness(0.8);
+    z-index: 0;
+}
+
+.sobre.abierto .sello {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4);
+    pointer-events: none;
+}
+
+.sobre.abierto .carta-interior {
+    transform: translateY(-65px);
+    height: 105%;
+    z-index: 3;
+}
+
+/* Movimiento suave del sobre */
+
+@keyframes flotar {
+    0%, 100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -9px;
+    }
+}
+
+/* =====================================
+   8. DETALLES FLORALES
+===================================== */
+
+.escena::before,
+.escena::after {
+    position: absolute;
+    z-index: -1;
+
+    color: var(--lavanda);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.escena::before {
+    content: "✿";
+    top: 15px;
+    left: 20px;
+    font-size: 3rem;
+
+    animation: flor 6s ease-in-out infinite;
+}
+
+.escena::after {
+    content: "✿";
+    right: 20px;
+    bottom: 15px;
+
+    color: var(--rosa);
+    font-size: 2.5rem;
+
+    animation: flor 7s ease-in-out infinite reverse;
+}
+
+@keyframes flor {
+    0%, 100% {
+        transform: rotate(-8deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(12deg) translateY(-8px);
+    }
+}
+
+/* =====================================
+   9. PROGRESO DE LOS MENSAJES
+===================================== */
+
+#progreso-mensaje {
+    color: var(--dorado);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+/* =====================================
+   10. DISEÑO PARA CELULARES
+===================================== */
+
+@media (max-width: 600px) {
+    .carta {
+        padding: 18px 12px;
+    }
+
+    .escena {
+        min-height: 500px;
+        padding: 40px 22px;
+        border-radius: 22px;
+        gap: 17px;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 9vw, 2.6rem);
+    }
+
+    .escena > p:not(.subtitulo) {
+        font-size: 0.95rem;
+    }
+
+    .sobre {
+        width: 165px;
+        height: 110px;
+    }
+
+    button {
+        max-width: 100%;
+        padding: 13px 20px;
+    }
+}
+
+/* =====================================
+   11. RESPETAR PREFERENCIAS DE MOVIMIENTO
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =====================================
+   12. JARDÍN MÁGICO
+===================================== */
+
+
+/* Capa de pétalos */
+#petalos-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Forma de cada pétalo */
+.petalo {
+  position: absolute;
+  top: -35px;
+  left: 0;
+  width: var(--tamano);
+  height: calc(var(--tamano) * 1.5);
+  background: linear-gradient(
+    135deg,
+    #f8cce7,
+    #dca7df 60%,
+    #b88bd1
+  );
+  border-radius: 80% 10% 70% 30%;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: caer-petalo var(--duracion) linear forwards;
+}
+
+@keyframes caer-petalo {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -5vh, 0) rotate(0deg);
+  }
+
+  12% {
+    opacity: var(--opacidad);
+  }
+
+  80% {
+    opacity: var(--opacidad);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate3d(var(--desplazamiento), 110vh, 0)
+      rotate(var(--rotacion));
+  }
+}
+
+/* Respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .petalo {
+    animation: none;
+    display: none;
+  }
+}
+
+
+/* Revelación suave de los mensajes */
+
+#texto-mensaje {
+    opacity: 1;
+}
+
+#texto-mensaje.revelar {
+    animation: revelar-mensaje 0.8s ease both;
+}
+
+@keyframes revelar-mensaje {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+        filter: blur(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Brillo especial para el cierre */
+
+#escena-final h1,
+#escena-final h2 {
+    animation: brillo-final 3s ease-in-out infinite alternate;
+}
+
+@keyframes brillo-final {
+    from {
+        text-shadow: 0 0 8px rgba(199, 166, 229, 0.15);
+    }
+
+    to {
+        text-shadow:
+            0 0 12px rgba(199, 166, 229, 0.55),
+            0 0 25px rgba(240, 215, 155, 0.3);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #texto-mensaje.revelar,
+    #escena-final h1,
+    #escena-final h2 {
+        animation: none;
+    }
+}
+
+
+/* Recuerdos especiales de Mary */
+
+.recuerdos-especiales {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 24px;
+    width: 100%;
+    margin: 30px auto 20px;
+}
+
+.recuerdo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    width: 190px;
+    max-width: 100%;
+    padding: 22px 16px;
+
+    border: 1px solid rgba(240, 215, 155, 0.3);
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 0 22px rgba(199, 166, 229, 0.07);
+
+    text-align: center;
+    animation: aparecer-recuerdo 1s ease both;
+}
+
+.recuerdo-piedra {
+    animation-delay: 0.25s;
+}
+
+.simbolo-recuerdo {
+    display: inline-block;
+    font-size: 3rem;
+    line-height: 1.3;
+}
+
+
+/* El girasol: brillo dorado */
+
+.recuerdo-girasol .simbolo-recuerdo {
+    filter:
+        drop-shadow(0 0 8px rgba(255, 207, 83, 0.7))
+        drop-shadow(0 0 20px rgba(255, 174, 45, 0.35));
+
+    animation: girasol-suave 4s ease-in-out infinite;
+}
+
+/* La piedra: reflejo de luz lunar */
+
+.recuerdo-piedra .simbolo-recuerdo {
+    filter:
+        drop-shadow(0 0 7px rgba(199, 166, 229, 0.7))
+        drop-shadow(0 0 18px rgba(180, 195, 255, 0.35));
+
+    animation: piedra-lunar 5s ease-in-out infinite;
+}
+
+@keyframes piedra-lunar {
+    0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+        filter:
+            drop-shadow(0 0 5px rgba(199, 166, 229, 0.4));
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(3deg);
+        filter:
+            drop-shadow(0 0 12px rgba(199, 166, 229, 0.8))
+            drop-shadow(0 0 22px rgba(180, 195, 255, 0.4));
+    }
+}
+
+.recuerdo p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+@keyframes aparecer-recuerdo {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes girasol-suave {
+    0%, 100% {
+        transform: rotate(-5deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(5deg) scale(1.06);
+    }
+}
+
+@media (max-width: 480px) {
+    .recuerdos-especiales {
+        gap: 14px;
+    }
+
+    .recuerdo {
+        width: 145px;
+        padding: 16px 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .recuerdo,
+    .recuerdo-girasol .simbolo-recuerdo {
+        animation: none;
+    }
+}
+
+
+/* Nombre de la destinataria en el sobre */
+
+.destinataria {
+    position: absolute;
+    z-index: 5;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    text-align: center;
+
+    color: var(--crema);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(240, 215, 155, 0.35);
+
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.nombre-destinataria {
+    display: block;
+    margin-top: 5px;
+
+    color: var(--dorado);
+    font-size: 2rem;
+    font-family: Georgia, serif;
+    font-style: italic;
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 0 10px rgba(240, 215, 155, 0.35),
+        0 0 22px rgba(199, 166, 229, 0.25);
+}
+
+/* Mensaje oculto hasta que se abra el sobre */
+
+.mensaje-sorpresa {
+    position: absolute;
+    z-index: 20;
+    top: -10%;
+    left: 50%;
+    width: 75%;
+
+    transform: translate(-50%, 10px);
+    opacity: 0;
+
+    color: var(--dorado);
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    font-weight: bold;
+    text-align: center;
+
+    text-shadow:
+        0 0 8px rgba(240, 215, 155, 0.4),
+        0 0 16px rgba(199, 166, 229, 0.35);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+
+/* Estado de sorpresa */
+
+.sobre.abierto .destinataria {
+    opacity: 0;
+    transform: translate(-50%, -65%);
+}
+
+.sobre.abierto .mensaje-sorpresa {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    transition-delay: 0.35s;
+}
+
+
+/* Ambiente nocturno para los recuerdos */
+
+.recuerdo {
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(199, 166, 229, 0.12),
+            transparent 70%
+        ),
+        rgba(18, 17, 40, 0.72);
+
+    border-color: rgba(240, 215, 155, 0.35);
+
+    box-shadow:
+        inset 0 0 20px rgba(199, 166, 229, 0.04),
+        0 0 24px rgba(15, 12, 35, 0.2);
+}
+
+.recuerdo-girasol {
+    border-color: rgba(240, 215, 155, 0.45);
+}
+
+.recuerdo-piedra {
+    border-color: rgba(199, 166, 229, 0.45);
+}
+
+.recuerdo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 28px rgba(199, 166, 229, 0.16);
+}
+
+
+/* Contenedor de las partículas */
+
+.recuerdo {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.polvo-estrellas {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Mantener los símbolos y textos delante del polvo */
+
+.simbolo-recuerdo,
+.recuerdo p {
+    position: relative;
+    z-index: 1;
+}
+
+/* Cada pequeña partícula luminosa */
+
+.particula-luminosa {
+    position: absolute;
+    bottom: -8px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+
+    background: #ffe8a6;
+    box-shadow:
+        0 0 6px rgba(255, 232, 166, 0.9),
+        0 0 12px rgba(255, 205, 100, 0.55);
+
+    opacity: 0;
+    animation: ascender-estrella var(--duracion, 3s) ease-in-out forwards;
+}
+
+.recuerdo-piedra .particula-luminosa {
+    background: #e5d5ff;
+    box-shadow:
+        0 0 6px rgba(229, 213, 255, 0.95),
+        0 0 12px rgba(180, 195, 255, 0.65);
+}
+
+@keyframes ascender-estrella {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+
+    20% {
+        opacity: 0.9;
+    }
+
+    75% {
+        opacity: 0.65;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.2);
+    }
+}
